@@ -184,7 +184,7 @@ header h1 {
 .background-options, .sticker-options {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(40px, 1fr));
-    gap: 4px;
+    gap: 10px;
 }
 
 .bg-btn, .sticker-btn, .tool-btn, .btn {

@@ -18,6 +18,12 @@ class PurikuraApp {
         this.actionsSection.style.display = 'none';
         this.undoBtn = document.getElementById('undo-btn');
         
+        // Pen layer for strokes only
+        this.penLayer = document.createElement('canvas');
+        this.penLayer.width = this.canvas.width;
+        this.penLayer.height = this.canvas.height;
+        this.penCtx = this.penLayer.getContext('2d');
+        
         this.initCanvas();
         this.bindEvents();
         this.disableEditingTools();
@@ -27,8 +33,11 @@ class PurikuraApp {
     initCanvas() {
         this.canvas.width = 600;
         this.canvas.height = 600;
+        this.penLayer.width = 600;
+        this.penLayer.height = 600;
         this.ctx.fillStyle = '#2d3748';
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
+        this.penCtx.clearRect(0, 0, this.penLayer.width, this.penLayer.height);
         this.saveToHistory();
     }
 
@@ -136,6 +145,9 @@ class PurikuraApp {
         img.onload = () => {
             this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
             this.ctx.drawImage(img, 0, 0);
+            // Also update pen layer from the loaded image (extract pen only)
+            this.penCtx.clearRect(0, 0, this.penLayer.width, this.penLayer.height);
+            this.penCtx.drawImage(img, 0, 0);
         };
         img.src = this.canvasHistory[this.historyIndex];
     }
@@ -232,6 +244,8 @@ class PurikuraApp {
         
         // Redraw stickers
         this.stickers.forEach(sticker => this.drawSticker(sticker));
+        // Draw pen layer on top
+        this.ctx.drawImage(this.penLayer, 0, 0);
     }
 
     drawBackground() {
@@ -259,7 +273,6 @@ class PurikuraApp {
         if (!this.hasPhoto) return;
         this.currentBackground = bgType;
         this.redrawCanvas();
-        this.saveToHistory();
     }
 
     setTool(tool) {
@@ -307,6 +320,8 @@ class PurikuraApp {
         const pos = this.getCanvasPos(e, isTouch);
         this.ctx.beginPath();
         this.ctx.moveTo(pos.x, pos.y);
+        this.penCtx.beginPath();
+        this.penCtx.moveTo(pos.x, pos.y);
     }
 
     draw(e, isTouch = false) {
@@ -318,6 +333,12 @@ class PurikuraApp {
         this.ctx.lineWidth = this.penSize;
         this.ctx.lineCap = 'round';
         this.ctx.stroke();
+        // Draw on pen layer too
+        this.penCtx.lineTo(pos.x, pos.y);
+        this.penCtx.strokeStyle = this.penColor;
+        this.penCtx.lineWidth = this.penSize;
+        this.penCtx.lineCap = 'round';
+        this.penCtx.stroke();
     }
 
     stopDrawing() {
@@ -364,6 +385,7 @@ class PurikuraApp {
     clearCanvas() {
         if (!this.hasPhoto) return;
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
+        this.penCtx.clearRect(0, 0, this.penLayer.width, this.penLayer.height);
         this.stickers = [];
         this.drawBackground();
         if (this.backgroundImage) {
@@ -387,6 +409,8 @@ class PurikuraApp {
         this.canvasHistory = [];
         this.historyIndex = -1;
         this.hasPhoto = false;
+        // Always clear pen layer
+        this.penCtx.clearRect(0, 0, this.penLayer.width, this.penLayer.height);
         this.clearCanvas();
         this.disableEditingTools();
         this.showCaptureSection();
