@@ -1,4 +1,4 @@
-# Fotobella - Photo Booth App
+# Fotobella - Photo Edit App
 
 Built with plain HTML, CSS, and JavaScript
 No external dependencies or libraries
@@ -11,6 +11,5 @@ No external dependencies or libraries
 • **Stickers**: Add decorative emoji stickers (hearts, stars, flowers, crowns, sparkles, rainbows)
 • **Download**: Save edited photos as PNG images
 • **Mobile Responsive**: Works on both desktop and mobile devices
-• **No Dependencies**: Pure HTML/CSS/JavaScript implementation
 
 Website: [Visit Website](https://fotobella.netlify.app/)
