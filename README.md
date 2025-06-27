@@ -3,6 +3,14 @@
 Built with plain HTML, CSS, and JavaScript
 No external dependencies or libraries
 
-Design doc: [View Design Document](https://evolany.sg.larksuite.com/docx/K6KYdTvtCoZgdKxl1nelgBj0gdd)
+## How It Works
 
-Website: [Visit Website](https://cheerful-cupcake-d7e739.netlify.app/)
+• **Photo Capture**: Take photos using device camera or upload existing images
+• **Background Options**: Choose from preset colors (pink, blue) or custom colors, or keep transparent
+• **Drawing Tools**: Draw on photos with adjustable pen size and colors, includes undo functionality
+• **Stickers**: Add decorative emoji stickers (hearts, stars, flowers, crowns, sparkles, rainbows)
+• **Download**: Save edited photos as PNG images
+• **Mobile Responsive**: Works on both desktop and mobile devices
+• **No Dependencies**: Pure HTML/CSS/JavaScript implementation
+
+Website: [Visit Website](https://fotobella.netlify.app/)
