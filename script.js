@@ -76,6 +76,14 @@ class PurikuraApp {
         document.querySelectorAll('.bg-btn').forEach(btn => {
             btn.addEventListener('click', () => this.changeBackground(btn.dataset.bg));
         });
+        // Background color picker
+        const bgColorPicker = document.getElementById('bg-color-picker');
+        if (bgColorPicker) {
+            bgColorPicker.addEventListener('input', (e) => {
+                this.changeBackground('custom');
+                this.customBgColor = e.target.value;
+            });
+        }
 
         // Sticker buttons
         document.querySelectorAll('.sticker-btn').forEach(btn => {
@@ -227,18 +235,22 @@ class PurikuraApp {
     }
 
     drawBackground() {
-        switch(this.currentBackground) {
-            case 'pink':
-                this.ctx.fillStyle = '#a855f7';
-                break;
-            case 'blue':
-                this.ctx.fillStyle = '#4299e1';
-                break;
-            case 'purple':
-                this.ctx.fillStyle = '#9f7aea';
-                break;
-            default:
-                this.ctx.fillStyle = '#2d3748';
+        if (this.currentBackground === 'custom' && this.customBgColor) {
+            this.ctx.fillStyle = this.customBgColor;
+        } else {
+            switch(this.currentBackground) {
+                case 'pink':
+                    this.ctx.fillStyle = 'palevioletred';
+                    break;
+                case 'blue':
+                    this.ctx.fillStyle = 'cornflowerblue';
+                    break;
+                case 'green':
+                    this.ctx.fillStyle = 'mediumseagreen';
+                    break;
+                default:
+                    this.ctx.fillStyle = '#2d3748';
+            }
         }
         this.ctx.fillRect(0, 0, this.canvas.width, this.canvas.height);
     }
@@ -252,9 +264,15 @@ class PurikuraApp {
 
     setTool(tool) {
         if (!this.hasPhoto) return;
-        this.currentTool = tool;
-        document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
-        document.getElementById(`${tool}-tool`).classList.add('active');
+        if (this.currentTool === tool) {
+            // Toggle off
+            this.currentTool = null;
+            document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
+        } else {
+            this.currentTool = tool;
+            document.querySelectorAll('.tool-btn').forEach(btn => btn.classList.remove('active'));
+            document.getElementById(`${tool}-tool`).classList.add('active');
+        }
     }
 
     setPenColor(color) {
@@ -267,20 +285,23 @@ class PurikuraApp {
     }
 
     getCanvasPos(e, isTouch) {
+        const rect = this.canvas.getBoundingClientRect();
         if (isTouch) {
-            const rect = this.canvas.getBoundingClientRect();
             const touch = e.touches[0] || e.changedTouches[0];
             return {
-                x: touch.clientX - rect.left,
-                y: touch.clientY - rect.top
+                x: (touch.clientX - rect.left) * (this.canvas.width / rect.width),
+                y: (touch.clientY - rect.top) * (this.canvas.height / rect.height)
             };
         } else {
-            return { x: e.offsetX, y: e.offsetY };
+            return {
+                x: (e.clientX - rect.left) * (this.canvas.width / rect.width),
+                y: (e.clientY - rect.top) * (this.canvas.height / rect.height)
+            };
         }
     }
 
     startDrawing(e, isTouch = false) {
-        if (!this.hasPhoto) return;
+        if (!this.hasPhoto || this.currentTool !== 'pen') return;
         e.preventDefault();
         this.isDrawing = true;
         const pos = this.getCanvasPos(e, isTouch);
@@ -289,7 +310,7 @@ class PurikuraApp {
     }
 
     draw(e, isTouch = false) {
-        if (!this.isDrawing || !this.hasPhoto) return;
+        if (!this.isDrawing || !this.hasPhoto || this.currentTool !== 'pen') return;
         e.preventDefault();
         const pos = this.getCanvasPos(e, isTouch);
         this.ctx.lineTo(pos.x, pos.y);
