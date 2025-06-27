@@ -42,7 +42,7 @@ header h1 {
 .section h2 {
     text-align: center;
     margin-bottom: 15px;
-    color: #a855f7;
+    color: #fff !important;
     font-size: 1.2rem;
 }
 
@@ -169,9 +169,9 @@ header h1 {
 }
 
 .tool-group h3 {
-    color: #a855f7;
+    font-size: 0.9rem;
+    color: #fff !important;
     margin-bottom: 6px;
-    font-size: 1rem;
 }
 
 .background-options, .sticker-options {
@@ -434,4 +434,8 @@ input[type="range"]:focus::-ms-thumb {
 }
 input[type="range"]:focus::-moz-range-thumb {
     box-shadow: 0 0 0 4px rgba(172,40,197,0.2);
+}
+
+.section h2 {
+    color: #fff !important;
 } 
