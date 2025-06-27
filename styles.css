@@ -336,7 +336,6 @@ body, html {
 
 .section h2,
 .tool-group h3,
-header h1,
 #actions-section h3 {
     color: var(--highlight) !important;
 }
