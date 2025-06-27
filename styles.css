@@ -328,4 +328,111 @@ body, html {
     flex-direction: row;
     gap: 10px;
     margin-bottom: 8px;
+}
+
+:root {
+    --highlight: #AC28C5;
+}
+
+.section h2,
+.tool-group h3,
+header h1,
+#actions-section h3 {
+    color: var(--highlight) !important;
+}
+
+.btn.primary {
+    background: linear-gradient(45deg, var(--highlight), #c084fc);
+    color: white;
+}
+
+.btn.secondary {
+    border: 1px solid var(--highlight);
+}
+
+.bg-btn, .sticker-btn, .tool-btn, .btn {
+    border: none !important;
+}
+
+.bg-btn,
+.tool-btn.active {
+    background: var(--highlight);
+    color: white;
+}
+
+.bg-btn[data-bg="pink"],
+.bg-btn[data-bg="gradient"] {
+    background: var(--highlight);
+    color: white;
+}
+
+#editor-canvas {
+    border: 2px solid var(--highlight);
+}
+
+#pen-size-display {
+    color: var(--highlight);
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 8px;
+    background: #e0e0e0;
+    border-radius: 4px;
+    outline: none;
+    margin: 0;
+    padding: 0;
+}
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #AC28C5;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    border: none;
+}
+input[type="range"]::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #AC28C5;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    border: none;
+}
+input[type="range"]::-ms-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #AC28C5;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+    border: none;
+}
+input[type="range"]::-webkit-slider-runnable-track {
+    height: 8px;
+    border-radius: 4px;
+    background: #AC28C5;
+}
+input[type="range"]::-ms-fill-lower {
+    background: #AC28C5;
+}
+input[type="range"]::-ms-fill-upper {
+    background: #e0e0e0;
+}
+input[type="range"]:focus {
+    outline: none;
+}
+input[type="range"]:focus::-webkit-slider-thumb {
+    box-shadow: 0 0 0 4px rgba(172,40,197,0.2);
+}
+input[type="range"]:focus::-ms-thumb {
+    box-shadow: 0 0 0 4px rgba(172,40,197,0.2);
+}
+input[type="range"]:focus::-moz-range-thumb {
+    box-shadow: 0 0 0 4px rgba(172,40,197,0.2);
 } 
