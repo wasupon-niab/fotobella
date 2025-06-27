@@ -440,6 +440,13 @@ input[type="range"]:focus::-moz-range-thumb {
     overflow-x: hidden !important;
     box-sizing: border-box;
   }
+  #editor-section {
+    padding: 50px;
+  }
+  #editor-canvas, .tools-panel {
+    width: 300px !important;
+    max-width: 100vw;
+  }
   #camera {
     max-width: 100vw;
     width: 100vw;
