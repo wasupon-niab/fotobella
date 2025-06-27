@@ -484,4 +484,27 @@ input[type="range"]:focus::-moz-range-thumb {
     max-height: 100vh;
     overflow-y: auto;
   }
+}
+
+.sticker-btn {
+  padding: 4px 6px;
+  border: 2px solid #a855f7;
+  border-radius: 8px;
+  background: #fff;
+  color: #222;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 1.4rem;
+  margin-right: 4px;
+  margin-bottom: 4px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.08);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.sticker-btn:hover {
+  background: #a855f7;
+  color: #fff;
+  transform: scale(1.05);
+  border-color: #a855f7;
 } 
