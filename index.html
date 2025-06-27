@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fotobella</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Fotobella</h1>
+        </header>
+
+        <main>
+            <!-- Actions Section (full width) -->
+            <div class="tool-group actions" id="actions-section">
+                <h3>Actions</h3>
+                <button id="download-btn" class="btn success">Download</button>
+                <button id="new-photo-btn" class="btn primary">New Photo</button>
+            </div>
+            <!-- Photo Capture Section -->
+            <section id="capture-section" class="section">
+                <h2>Take or Upload Photo</h2>
+                <div class="capture-options">
+                    <button id="camera-btn" class="btn primary">Open Camera</button>
+                    <button id="upload-btn" class="btn primary">Upload Photo</button>
+                </div>
+                
+                <div id="camera-container" class="hidden">
+                    <video id="camera" autoplay playsinline></video>
+                    <div class="camera-controls">
+                        <button id="capture-btn" class="btn success">📸 Capture</button>
+                        <button id="cancel-camera-btn" class="btn secondary">❌ Cancel</button>
+                    </div>
+                </div>
+
+                <input type="file" id="file-input" accept="image/*" class="hidden">
+            </section>
+
+            <!-- Editor Section -->
+            <section id="editor-section" class="section hidden">
+                <h2>Edit Your Photo</h2>
+                
+                <div class="editor-container">
+                    <div class="canvas-container">
+                        <canvas id="editor-canvas"></canvas>
+                    </div>
+                    
+                    <div class="tools-panel">
+                        <div class="tool-group">
+                            <h3>Background</h3>
+                            <div class="background-options">
+                                <button class="bg-btn" data-bg="none">None</button>
+                                <button class="bg-btn" data-bg="pink">Pink</button>
+                                <button class="bg-btn" data-bg="blue">Blue</button>
+                                <button class="bg-btn" data-bg="purple">Purple</button>
+                            </div>
+                        </div>
+
+                        <div class="tool-group">
+                            <h3>Drawing</h3>
+                            <div class="drawing-tools">
+                                <div class="draw-row">
+                                    <button id="pen-tool" class="tool-btn active">✏️ Pen</button>
+                                    <button id="undo-btn" class="btn secondary">↶ Undo</button>
+                                    <button id="clear-btn" class="btn secondary">Clear All</button>
+                                </div>
+                                <input type="color" id="pen-color" value="#ff0000">
+                                <input type="range" id="pen-size" min="1" max="20" value="5">
+                            </div>
+                        </div>
+
+                        <div class="tool-group">
+                            <h3>Stickers</h3>
+                            <div class="sticker-options">
+                                <button class="sticker-btn" data-sticker="heart">❤️</button>
+                                <button class="sticker-btn" data-sticker="star">⭐</button>
+                                <button class="sticker-btn" data-sticker="flower">🌸</button>
+                                <button class="sticker-btn" data-sticker="crown">👑</button>
+                                <button class="sticker-btn" data-sticker="sparkle">✨</button>
+                                <button class="sticker-btn" data-sticker="rainbow">🌈</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html> 
